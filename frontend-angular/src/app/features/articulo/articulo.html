@@ -1,0 +1,42 @@
+@if (cargando()) {
+  <div class="cargando">
+    <svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.4"><path d="M12 3a9 9 0 1 0 9 9" stroke-linecap="round"/></svg>
+    Cargando artículo…
+  </div>
+} @else if (error()) {
+  <div class="estado-error">No se pudo cargar el artículo. <a routerLink="/articulos">Volver a la lista</a></div>
+} @else if (articulo(); as art) {
+  <div class="dos-col">
+    <article style="min-width: 0">
+      <a class="volver" routerLink="/articulos">← Todos los artículos</a>
+      <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 10px">
+        <span class="categoria">Artículo</span>
+        @if (art.revid) {
+          <span class="meta">rev. {{ art.revid }}</span>
+        }
+      </div>
+      <h1 class="titulo-art">{{ art.titulo }}</h1>
+      <button class="btn btn-ia" style="margin-bottom: 22px; display: inline-flex; align-items: center; gap: 8px" (click)="preguntar()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+        Preguntar al chatbot sobre este artículo
+      </button>
+      <div class="wiki-cuerpo" [innerHTML]="cuerpo()"></div>
+    </article>
+
+    <aside class="lateral">
+      @if (puedeEditar()) {
+        <div class="tarjeta" style="border-color: var(--brand)">
+          <div style="display: flex; align-items: center; gap: 7px; font: 600 13px 'IBM Plex Sans'; color: var(--brand-d); margin-bottom: 10px">
+            <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--brand)"></span>Sugerencias IA
+          </div>
+          <p style="margin: 0 0 12px; font-size: 12.5px; color: var(--muted); line-height: 1.45">Disponible para tu rol. Abre el editor asistido para mejorar este artículo.</p>
+          <a class="btn btn-marca" routerLink="/editor" style="display: block; text-align: center; padding: 9px">Abrir editor asistido</a>
+        </div>
+      }
+      <div class="tarjeta">
+        <div style="font: 600 13px 'IBM Plex Sans'; margin-bottom: 8px">Sobre este artículo</div>
+        <p style="margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.5">Contenido servido desde MediaWiki a través de la API de Busca-YA. La wiki es la fuente única de verdad.</p>
+      </div>
+    </aside>
+  </div>
+}
