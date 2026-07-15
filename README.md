@@ -1,6 +1,8 @@
-# Portal Wiki Inteligente — MediaWiki + IA
+# Busca-YA — Portal Wiki Inteligente (MediaWiki + IA)
 
 > Trabajo de investigación: extensión y modernización de MediaWiki mediante un portal web propio (Angular + Laravel) e integración de módulos de Inteligencia Artificial (chatbot conversacional, búsqueda semántica y generación/asistencia de contenido).
+>
+> **Busca-YA** es el nombre de marca visible para el usuario final (header, login, pantallas). No hay identidad visual definida todavía — el diseño parte de cero, con tono sugerido moderno/confiable/accesible, y debe ser **responsive completo** (desktop + mobile desde el inicio).
 
 ---
 
@@ -16,9 +18,10 @@
 8. [Stack tecnológico](#stack-tecnológico)
 9. [Estructura del repositorio](#estructura-del-repositorio)
 10. [Endpoints principales de la API](#endpoints-principales-de-la-api)
-11. [Instalación y configuración](#instalación-y-configuración)
-12. [Roadmap](#roadmap)
-13. [Licencia](#licencia)
+11. [Especificación de interfaces (UI/UX)](#especificación-de-interfaces-uiux)
+12. [Instalación y configuración](#instalación-y-configuración)
+13. [Roadmap](#roadmap)
+14. [Licencia](#licencia)
 
 ---
 
@@ -308,6 +311,53 @@ proyecto-mediawiki-ia/
 | `POST` | `/api/busqueda-semantica` | Realiza búsqueda semántica sobre el contenido de la wiki |
 | `POST` | `/api/asistente/redaccion` | Solicita sugerencias de redacción o resumen para un artículo |
 | `POST` | `/api/indexar` | Dispara el proceso de generación/actualización de embeddings |
+
+---
+
+## Especificación de interfaces (UI/UX)
+
+> Esta sección es el brief funcional para diseño de interfaces: qué pantallas existen, quién las usa, qué pasos siguen y qué estados debe contemplar cada una. No define look & feel (no hay identidad visual todavía) — sí define alcance y comportamiento.
+
+### Marca y tono
+
+- **Nombre visible:** Busca-YA (header, pestaña del navegador, pantallas de auth, footer).
+- **Identidad visual:** no definida aún — el diseño parte de cero. Tono sugerido de partida: moderno/tech, confiable, accesible (no institucional-acartonado, pero tampoco informal). Libertad total de paleta, tipografía y logo.
+- **Dispositivos:** responsive completo desde el día uno. Ninguna pantalla puede ser desktop-only o mobile-only.
+
+### Roles de usuario
+
+| Rol | Puede |
+|---|---|
+| **Visitante (no autenticado)** | Leer artículos, usar el chatbot y la búsqueda semántica en modo lectura |
+| **Usuario registrado** | Todo lo anterior + guardar historial de consultas al chatbot |
+| **Editor** | Todo lo anterior + usar el asistente de redacción/generación y enviar ediciones sugeridas |
+| **Administrador** | Todo lo anterior + gestionar usuarios/roles, disparar reindexado de embeddings, ver estado de colas/jobs |
+
+### Inventario de pantallas
+
+1. **Home / Landing** — buscador destacado (entrada a búsqueda semántica), artículos recientes/destacados, acceso directo al chat.
+2. **Explorador de artículos** — navegación por categorías/lista, estilo wiki tradicional.
+3. **Vista de artículo** — contenido renderizado desde wikitexto, historial de revisiones, botón "Preguntar al chatbot sobre este artículo", panel de sugerencias IA visible solo para Editor/Admin.
+4. **Búsqueda semántica** — input de búsqueda en lenguaje natural, resultados ordenados por similitud con extracto y referencia al artículo fuente.
+5. **Chatbot conversacional** — panel de chat (persistente/flotante o pantalla completa), respuestas siempre con cita/enlace al artículo fuente.
+6. **Editor asistido** — editor de wikitexto con panel lateral de sugerencias IA (redactar, resumir, corregir estilo); solo Editor/Admin.
+7. **Autenticación** — login y registro, con distinción de rol tras iniciar sesión.
+8. **Perfil / Historial** — historial de consultas al chatbot y de ediciones sugeridas por el usuario.
+9. **Panel de administración** — gestión de usuarios y roles, estado de indexación de embeddings, monitoreo de colas de trabajo.
+
+### Flujos de usuario clave
+
+- **Consulta al chatbot:** Home o artículo → abre panel de chat → escribe pregunta → ve respuesta con fuente citada → click en la fuente navega al artículo.
+- **Búsqueda semántica:** Home → escribe consulta → ve lista de resultados por relevancia → entra a un artículo.
+- **Edición asistida:** Vista de artículo (como Editor) → abre editor → pide sugerencia IA (redactar/resumir/corregir) → revisa y acepta/edita → envía la edición.
+- **Autenticación y permisos:** Visitante intenta una acción restringida (editar, ver historial) → se le pide login/registro → tras autenticarse, la UI se adapta a su rol.
+
+### Estados de UI a contemplar en cada pantalla
+
+- **Carga:** generando respuesta del chatbot, indexando embeddings, cargando artículo.
+- **Vacío:** sin resultados de búsqueda, sin historial todavía.
+- **Error:** LLM no disponible, MediaWiki no responde, fallo de red.
+- **Éxito:** confirmación de edición enviada, consulta guardada en historial.
 
 ---
 
