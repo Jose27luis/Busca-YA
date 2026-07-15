@@ -12,7 +12,7 @@
         <button class="accion" (click)="ejecutar('resumir')">Resumir</button>
         <button class="accion" (click)="ejecutar('corregir')">Corregir estilo</button>
       </div>
-      <textarea class="editor-area" [value]="texto()" (input)="texto.set($any($event.target).value)"></textarea>
+      <textarea #area class="editor-area" [value]="texto()" (input)="texto.set(area.value)"></textarea>
       <div style="display: flex; justify-content: flex-end; margin-top: 12px">
         <button class="btn btn-marca" (click)="enviar()">Enviar edición</button>
       </div>
