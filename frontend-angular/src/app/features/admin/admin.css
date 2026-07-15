@@ -1,0 +1,31 @@
+.metricas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.metrica-etiqueta {
+  font: 500 12px 'IBM Plex Sans';
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.metrica-valor {
+  font: 700 26px 'Space Grotesk';
+}
+
+.info-modelo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--ai-d);
+  margin-bottom: 14px;
+}
+
+@media (max-width: 880px) {
+  .metricas {
+    grid-template-columns: 1fr;
+  }
+}
