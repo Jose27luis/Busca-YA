@@ -1,0 +1,33 @@
+<div class="pantalla">
+  <a class="marca-auth" routerLink="/">
+    <span class="logo">B</span>
+    <span class="nombre">Busca-YA</span>
+  </a>
+
+  <div class="caja">
+    <div class="tabs">
+      <button class="tab" [class.activa]="modo() === 'login'" (click)="modo.set('login')">Iniciar sesión</button>
+      <button class="tab" [class.activa]="modo() === 'registro'" (click)="modo.set('registro')">Registrarse</button>
+    </div>
+
+    @if (error()) {
+      <div class="aviso">{{ error() }}</div>
+    }
+
+    <form (submit)="$event.preventDefault(); enviar()">
+      @if (modo() === 'registro') {
+        <label class="etiqueta">Nombre</label>
+        <input class="campo" [value]="nombre()" (input)="nombre.set($any($event.target).value)" placeholder="Tu nombre" />
+      }
+      <label class="etiqueta">Correo</label>
+      <input class="campo" type="email" [value]="email()" (input)="email.set($any($event.target).value)" placeholder="tucorreo@ejemplo.com" />
+      <label class="etiqueta">Contraseña</label>
+      <input class="campo" type="password" [value]="password()" (input)="password.set($any($event.target).value)" placeholder="••••••••" />
+      <button type="submit" class="btn btn-marca" style="width: 100%" [disabled]="enviando()">
+        {{ enviando() ? 'Procesando…' : (modo() === 'login' ? 'Iniciar sesión' : 'Crear cuenta') }}
+      </button>
+    </form>
+  </div>
+
+  <a routerLink="/" style="margin-top: 18px; color: var(--muted); font-size: 13px">← Volver como visitante</a>
+</div>
