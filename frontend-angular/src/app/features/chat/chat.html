@@ -48,7 +48,7 @@
   </div>
 
   <form class="barra-busqueda chat-entrada" (submit)="$event.preventDefault(); enviar()">
-    <input [value]="entrada()" (input)="entrada.set($any($event.target).value)" placeholder="Escribe tu pregunta…" />
+    <input [value]="entrada()" (input)="entrada.set($any($event.target).value)" />
     <button type="submit" class="enviar-btn" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg></button>
   </form>
 </div>
