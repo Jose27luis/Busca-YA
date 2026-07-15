@@ -74,6 +74,22 @@ class MediaWikiService
         ];
     }
 
+    public function estadisticas(): array
+    {
+        $data = $this->query([
+            'action' => 'query',
+            'meta' => 'siteinfo',
+            'siprop' => 'statistics',
+        ]);
+        $stats = $data['query']['statistics'] ?? [];
+
+        return [
+            'articulos' => $stats['articles'] ?? 0,
+            'paginas' => $stats['pages'] ?? 0,
+            'ediciones' => $stats['edits'] ?? 0,
+        ];
+    }
+
     public function search(string $query, int $limit = 20): array
     {
         $data = $this->query([
