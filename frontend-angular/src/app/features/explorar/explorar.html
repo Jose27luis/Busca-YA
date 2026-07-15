@@ -1,0 +1,27 @@
+<div class="aparece">
+  <h1 class="titulo-pagina">Explorar artículos</h1>
+  <p class="sub-pagina">{{ articulos().length }} artículos cargados de la base de conocimiento.</p>
+
+  <div class="lista">
+    @for (a of articulos(); track a.pageid) {
+      <button class="tarjeta tarjeta-click fila" (click)="abrir(a.titulo)">
+        <div style="flex: 1; min-width: 0">
+          <h3>{{ a.titulo }}</h3>
+        </div>
+        <span class="meta" style="flex: none">#{{ a.pageid }}</span>
+      </button>
+    } @empty {
+      @if (!cargando()) {
+        <div class="estado-vacio">No hay artículos para mostrar.</div>
+      }
+    }
+  </div>
+
+  @if (continuar()) {
+    <div class="mas">
+      <button class="btn btn-neutro" [disabled]="cargando()" (click)="cargar()">
+        {{ cargando() ? 'Cargando…' : 'Cargar más' }}
+      </button>
+    </div>
+  }
+</div>
