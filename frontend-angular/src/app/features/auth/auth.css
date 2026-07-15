@@ -1,0 +1,88 @@
+.pantalla {
+  min-height: calc(100vh - 130px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 18px;
+}
+
+.marca-auth {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 26px;
+}
+
+.marca-auth .logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--brand);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font: 700 17px 'Space Grotesk';
+}
+
+.marca-auth .nombre {
+  font: 700 21px 'Space Grotesk';
+  color: var(--ink);
+}
+
+.caja {
+  width: 100%;
+  max-width: 392px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 18px 50px -24px rgba(22, 22, 29, 0.32);
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--paper2);
+  padding: 4px;
+  border-radius: 11px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  font: 600 13px 'IBM Plex Sans';
+  cursor: pointer;
+  background: transparent;
+  color: var(--muted);
+}
+
+.tab.activa {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.etiqueta {
+  display: block;
+  font: 500 12px 'IBM Plex Sans';
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.caja .campo {
+  margin-bottom: 14px;
+}
+
+.aviso {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 10px 13px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
