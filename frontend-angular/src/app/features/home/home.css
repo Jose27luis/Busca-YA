@@ -1,0 +1,94 @@
+.hero {
+  text-align: center;
+  padding: 22px 0 8px;
+  animation: fadeup 0.4s ease;
+}
+
+.hero .insignia {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  background: var(--brand-t);
+  color: var(--brand-d);
+  border-radius: 999px;
+  font: 600 12px 'IBM Plex Sans';
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: 44px;
+  font-weight: 700;
+  max-width: 640px;
+  margin: 0 auto 14px;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.hero h1 span {
+  color: var(--brand);
+}
+
+.hero p {
+  max-width: 520px;
+  margin: 0 auto 26px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.hero form {
+  max-width: 560px;
+  margin: 0 auto 14px;
+  align-items: center;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.seccion {
+  margin-top: 40px;
+}
+
+.seccion-enc {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.rejilla .tarjeta-click {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  min-height: 150px;
+}
+
+.cap-icono {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 880px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .rejilla {
+    grid-template-columns: 1fr;
+  }
+}
