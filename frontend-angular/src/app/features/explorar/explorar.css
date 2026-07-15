@@ -1,0 +1,23 @@
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fila {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 13px;
+}
+
+.fila h3 {
+  font-size: 16px;
+}
+
+.mas {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
