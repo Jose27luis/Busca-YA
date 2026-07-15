@@ -1,0 +1,70 @@
+.dos-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 30px;
+  align-items: start;
+  animation: fadeup 0.35s ease;
+}
+
+.volver {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font: 500 12.5px 'IBM Plex Sans';
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 14px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.titulo-art {
+  font-size: 30px;
+  margin-bottom: 14px;
+  line-height: 1.12;
+}
+
+.wiki-cuerpo {
+  font-size: 15.5px;
+  line-height: 1.68;
+  color: #26262f;
+  overflow-wrap: break-word;
+}
+
+.wiki-cuerpo :is(h2, h3) {
+  font-family: 'Space Grotesk', sans-serif;
+  margin: 26px 0 10px;
+}
+
+.wiki-cuerpo p {
+  margin: 0 0 14px;
+}
+
+.wiki-cuerpo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.wiki-cuerpo table {
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+}
+
+.lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 74px;
+}
+
+@media (max-width: 880px) {
+  .dos-col {
+    grid-template-columns: 1fr;
+  }
+
+  .lateral {
+    position: static;
+  }
+}
