@@ -3,3 +3,7 @@
 
 # Prototipo de interfaces extraído (el fuente versionado es interfaces.zip)
 /interfaces/
+
+# Servicio de embeddings (venv y modelos descargados)
+/embeddings/venv/
+/embeddings/.hf/
