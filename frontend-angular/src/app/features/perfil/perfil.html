@@ -1,0 +1,36 @@
+<div class="envoltura">
+  <h1 style="font-size: 24px; margin-bottom: 18px">Perfil e historial</h1>
+
+  <div class="tarjeta perfil-cab">
+    <span class="avatar-grande">{{ inicial() }}</span>
+    <div>
+      <div style="font: 600 17px 'Space Grotesk'">{{ usuario()?.nombre }}</div>
+      <div style="font-size: 13px; color: var(--muted)">{{ usuario()?.email }} · Rol: {{ rolEtiqueta() }}</div>
+    </div>
+  </div>
+
+  <div class="hist-enc">
+    <h2 style="font-size: 17px">Consultas al chatbot</h2>
+    @if (consultas().length) {
+      <button class="btn btn-neutro" style="padding: 5px 12px; font-size: 12.5px" (click)="limpiar()">Limpiar</button>
+    }
+  </div>
+
+  @if (consultas().length) {
+    <div class="hist-lista">
+      @for (h of consultas(); track $index) {
+        <div class="tarjeta hist-item">
+          <div style="font: 600 13.5px 'IBM Plex Sans'; margin-bottom: 5px">{{ h.pregunta }}</div>
+          <div style="font-size: 12.5px; color: var(--muted); line-height: 1.45">{{ h.respuesta }}</div>
+          <div class="meta" style="margin-top: 7px">{{ formato(h.fecha) }}</div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="estado-vacio" style="background: var(--surface); border: 1px dashed var(--line); border-radius: 14px">
+      <div style="font-size: 14.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px">Aún no hay historial</div>
+      <div style="font-size: 13px; margin-bottom: 16px">Tus consultas al chatbot se guardarán aquí.</div>
+      <a class="btn btn-marca" routerLink="/chat">Ir al chatbot</a>
+    </div>
+  }
+</div>
