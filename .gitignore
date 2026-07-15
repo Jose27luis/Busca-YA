@@ -1,0 +1,5 @@
+# Core de MediaWiki instalado localmente (no se versiona: ~444M + secretos en LocalSettings.php)
+/mediawiki/
+
+# Prototipo de interfaces extraído (el fuente versionado es interfaces.zip)
+/interfaces/
