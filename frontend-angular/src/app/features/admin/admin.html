@@ -1,0 +1,43 @@
+<div class="aparece">
+  <h1 style="font-size: 24px; margin-bottom: 4px">Panel de administración</h1>
+  <p class="sub-pagina">Estado del corpus y de la indexación de embeddings.</p>
+
+  @if (cargando()) {
+    <div class="cargando">
+      <svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.4"><path d="M12 3a9 9 0 1 0 9 9" stroke-linecap="round"/></svg>
+      Cargando estadísticas…
+    </div>
+  } @else if (error()) {
+    <div class="estado-error">No se pudieron cargar las estadísticas.</div>
+  } @else if (stats(); as s) {
+    <div class="metricas">
+      <div class="tarjeta">
+        <div class="metrica-etiqueta">Artículos en la wiki</div>
+        <div class="metrica-valor">{{ s.articulos_wiki }}</div>
+      </div>
+      <div class="tarjeta">
+        <div class="metrica-etiqueta">Artículos indexados</div>
+        <div class="metrica-valor">{{ s.articulos_indexados }}</div>
+      </div>
+      <div class="tarjeta">
+        <div class="metrica-etiqueta">Fragmentos vectoriales</div>
+        <div class="metrica-valor">{{ s.fragmentos_vectoriales }}</div>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2 style="font-size: 16px; margin-bottom: 6px">Indexación de embeddings</h2>
+      @if (s.modelo_embeddings) {
+        <div class="info-modelo">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--ai)"></span>
+          Modelo activo: {{ s.modelo_embeddings }}
+        </div>
+      }
+      <p style="color: var(--muted); font-size: 12.5px; margin: 0; line-height: 1.5">
+        La regeneración de vectores se ejecuta desde el servidor con
+        <code style="font-family: 'IBM Plex Mono'">php artisan buscaya:indexar</code>.
+        Cada artículo se limpia de wikitexto, se divide en fragmentos y se re-embebe en la base vectorial.
+      </p>
+    </div>
+  }
+</div>
