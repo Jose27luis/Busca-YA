@@ -17,12 +17,12 @@
     <form (submit)="$event.preventDefault(); enviar()">
       @if (modo() === 'registro') {
         <label class="etiqueta">Nombre</label>
-        <input class="campo" [value]="nombre()" (input)="nombre.set($any($event.target).value)" />
+        <input #inNombre class="campo" [value]="nombre()" (input)="nombre.set(inNombre.value)" />
       }
       <label class="etiqueta">Correo</label>
-      <input class="campo" type="email" [value]="email()" (input)="email.set($any($event.target).value)" />
+      <input #inEmail class="campo" type="email" [value]="email()" (input)="email.set(inEmail.value)" />
       <label class="etiqueta">Contraseña</label>
-      <input class="campo" type="password" [value]="password()" (input)="password.set($any($event.target).value)" />
+      <input #inPass class="campo" type="password" [value]="password()" (input)="password.set(inPass.value)" />
       <button type="submit" class="btn btn-marca" style="width: 100%" [disabled]="enviando()">
         {{ enviando() ? 'Procesando…' : (modo() === 'login' ? 'Iniciar sesión' : 'Crear cuenta') }}
       </button>
