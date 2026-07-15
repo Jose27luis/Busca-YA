@@ -1,0 +1,54 @@
+<div class="chat">
+  <div class="chat-enc">
+    <div>
+      <h1 style="font-size: 22px">Chatbot</h1>
+      <p style="margin: 2px 0 0; font-size: 13px; color: var(--muted)">Respuestas basadas en la wiki, con fuente citada.</p>
+    </div>
+    <button class="btn btn-neutro" style="padding: 7px 13px; font-size: 12.5px" (click)="nueva()">Nueva conversación</button>
+  </div>
+
+  <div class="chat-cuerpo">
+    @if (vacio()) {
+      <div class="bienvenida">
+        <div style="width: 46px; height: 46px; border-radius: 13px; background: var(--ai-t); display: grid; place-items: center; margin: 0 auto 14px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--ai-d)" stroke-width="1.8"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></div>
+        <div style="font: 600 16px 'Space Grotesk'; margin-bottom: 6px">Pregúntame sobre la wiki</div>
+        <p style="color: var(--muted); font-size: 13.5px; margin: 0 0 16px">Responderé usando el contenido de los artículos y te mostraré la fuente.</p>
+        <div class="sugerencias">
+          @for (s of sugerencias; track s) {
+            <button class="sugerencia" (click)="enviar(s)">{{ s }}</button>
+          }
+        </div>
+      </div>
+    }
+
+    @for (m of mensajes(); track $index) {
+      <div class="fila-msg" [class.usuario]="m.rol === 'usuario'" [class.asistente]="m.rol === 'asistente'">
+        <div class="burbuja" [class.usuario]="m.rol === 'usuario'" [class.asistente]="m.rol === 'asistente'">
+          <div>{{ m.texto }}</div>
+          @if (m.fuentes && m.fuentes.length) {
+            <div class="fuentes">
+              <span style="font: 600 10.5px 'IBM Plex Mono'; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); align-self: center">Fuente</span>
+              @for (f of m.fuentes; track f) {
+                <button class="fuente-chip" (click)="abrir(f)">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 3h7v7"/><path d="M21 3 10 14"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>{{ f }}
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (cargando()) {
+      <div class="escribiendo"><span class="dot"></span><span class="dot" style="animation-delay: 0.2s"></span><span class="dot" style="animation-delay: 0.4s"></span></div>
+    }
+    @if (error()) {
+      <div class="estado-error" style="align-self: center">Error: {{ error() }}</div>
+    }
+  </div>
+
+  <form class="barra-busqueda chat-entrada" (submit)="$event.preventDefault(); enviar()">
+    <input [value]="entrada()" (input)="entrada.set($any($event.target).value)" placeholder="Escribe tu pregunta…" />
+    <button type="submit" class="enviar-btn" aria-label="Enviar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg></button>
+  </form>
+</div>
