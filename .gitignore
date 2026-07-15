@@ -7,3 +7,4 @@
 # Servicio de embeddings (venv y modelos descargados)
 /embeddings/venv/
 /embeddings/.hf/
+/embeddings/__pycache__/
