@@ -4,7 +4,7 @@
   <p>Busca-YA combina una wiki colaborativa con búsqueda semántica, un chatbot con fuentes citadas y un editor asistido.</p>
   <form class="barra-busqueda" (submit)="$event.preventDefault(); buscar()">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" style="align-self: center; flex: none"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
-    <input [value]="consulta()" (input)="consulta.set($any($event.target).value)" />
+    <input #ent [value]="consulta()" (input)="consulta.set(ent.value)" />
     <button type="submit" class="btn btn-marca" style="flex: none">Buscar</button>
   </form>
   <div class="chips">
