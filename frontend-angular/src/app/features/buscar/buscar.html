@@ -1,0 +1,53 @@
+<div class="envoltura">
+  <h1 class="titulo-pagina">Búsqueda semántica</h1>
+  <p class="sub-pagina">Describe lo que buscas en lenguaje natural. Comparamos el significado de tu consulta con los artículos.</p>
+
+  <form class="barra-busqueda" (submit)="$event.preventDefault(); ejecutar()">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" style="align-self: center; flex: none"><circle cx="11" cy="11" r="7"/><path d="m21 21-4-4"/></svg>
+    <input [value]="consulta()" (input)="consulta.set($any($event.target).value)" placeholder="p. ej. ¿cómo entiende el sistema el significado de una pregunta?" />
+    <button type="submit" class="btn btn-marca" style="flex: none">Buscar</button>
+  </form>
+  <div class="chips">
+    @for (chip of chips; track chip) {
+      <button class="pill" (click)="ejecutar(chip)">{{ chip }}</button>
+    }
+  </div>
+
+  <div style="margin-top: 26px">
+    @switch (estado()) {
+      @case ('cargando') {
+        <div class="cargando">
+          <svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2.4"><path d="M12 3a9 9 0 1 0 9 9" stroke-linecap="round"/></svg>
+          Calculando similitud semántica…
+        </div>
+      }
+      @case ('error') {
+        <div class="estado-error">No se pudo completar la búsqueda: {{ errorMsg() }}. <button class="btn btn-neutro" style="padding: 4px 10px" (click)="ejecutar()">Reintentar</button></div>
+      }
+      @case ('vacio') {
+        <div class="estado-vacio">
+          <div style="font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px">Sin resultados relevantes</div>
+          <div style="font-size: 13.5px">Prueba con otras palabras o un tema más general.</div>
+        </div>
+      }
+      @case ('ok') {
+        <div class="conteo">{{ resultados().length }} resultados ordenados por relevancia</div>
+        <div class="resultados">
+          @for (r of resultados(); track r.titulo) {
+            <button class="tarjeta tarjeta-click" (click)="abrir(r.titulo)">
+              <div class="res-enc">
+                <h3 style="font-size: 16px">{{ r.titulo }}</h3>
+                <span class="score">{{ (r.score * 100).toFixed(0) }}% afín</span>
+              </div>
+              <div class="barra-score"><span [style.width.%]="r.score * 100"></span></div>
+              <p style="margin: 0; font-size: 13px; color: var(--muted); line-height: 1.45">{{ r.fragmento }}</p>
+            </button>
+          }
+        </div>
+      }
+      @default {
+        <div class="estado-vacio" style="font-size: 14px">Escribe una consulta y presiona <b>Buscar</b> para empezar.</div>
+      }
+    }
+  </div>
+</div>
