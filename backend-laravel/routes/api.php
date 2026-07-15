@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticuloController;
 use App\Http\Controllers\AsistenteController;
 use App\Http\Controllers\AuthController;
@@ -22,4 +23,5 @@ Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/asistente/redaccion', [AsistenteController::class, 'redaccion']);
+    Route::get('/admin/estadisticas', [AdminController::class, 'estadisticas']);
 });
